@@ -1,0 +1,22 @@
+[
+ {
+  "id": "wri_wri1061017",
+  "name": "Changjiang (nuclear power plant, WRI)",
+  "lat": 19.46,
+  "lon": 108.9,
+  "cat": "nuclear_site",
+  "country_iso3": "CHN",
+  "note": "Listed as a nuclear plant in the WRI Global Power Plant Database: 1220.0 MW, commissioning year n/a. Operating status in 2026 is not re-verified in this build.",
+  "source": "WRI Global Power Plant Database (CC-BY 4.0)"
+ },
+ {
+  "id": "wri_wri1061019",
+  "name": "Fangchenggang (nuclear power plant, WRI)",
+  "lat": 21.67,
+  "lon": 108.56,
+  "cat": "nuclear_site",
+  "country_iso3": "CHN",
+  "note": "Listed as a nuclear plant in the WRI Global Power Plant Database: 2000.0 MW, commissioning year n/a. Operating status in 2026 is not re-verified in this build.",
+  "source": "WRI Global Power Plant Database (CC-BY 4.0)"
+ }
+]
