@@ -279,3 +279,10 @@ if os.path.exists(_WRI):
 
 # Drop the empty placeholder row used while drafting (kept out of the dataset).
 MARKERS = [m for m in MARKERS if m["id"] != "ram_naval_placeholder_skip"]
+
+# India rule (shared guard): nothing is plotted inside India's survey outline.
+try:
+    from .india_guard import clean_points as _india_points
+except ImportError:  # run as a plain script
+    from india_guard import clean_points as _india_points
+MARKERS = _india_points(MARKERS)

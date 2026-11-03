@@ -38,7 +38,7 @@ REFERENCE_ITEMS = [
     {"category": "naval", "label": "Malaysia: two Scorpene submarines at Sepanggar; RMN Fleet HQ at Lumut",
      "text": "Global Military (2026) lists two Scorpene-class submarines based at Sepanggar, Sabah, and the Fleet headquarters (KD Malaya) at Lumut, Perak. The 15-to-5 modernisation plan consolidates the fleet into five standard classes.",
      "source": "Global Military (2026); NTI (2020)", "date": "2026", "url": None, "connector": "reference"},
-    {"category": "us_base", "label": "USS Cincinnati visits China-funded Ream Naval Base (January 2026)",
+    {"category": "milops", "label": "USS Cincinnati visits China-funded Ream Naval Base (January 2026)",
      "text": "The USS Cincinnati visited Ream Naval Base on 24 January 2026, the first US warship visit to the Chinese-built port. Cambodia says Ream is open to all navies. US officials and analysts have raised concerns about Chinese access.",
      "source": "Defense News (6 Feb 2026); RFA (2024); AMTI / CSIS", "date": "Jan-Feb 2026", "url": None, "connector": "reference"},
     {"category": "scs", "label": "China's militarised reefs and the Antelope Reef build (2022-2026)",

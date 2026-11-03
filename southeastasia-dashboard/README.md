@@ -1,4 +1,38 @@
-# SouthEast Asia Dashboard - v1
+# SouthEast Asia Dashboard - v1.7
+
+## What changed in v1.7
+
+- Three screen controls sit in the map's top-right corner: **Full map**, **Full screen** and **Hide bars**.
+- **Full map** hides the KPI strip, the map's header row, the news drawer and its tab, the heading panels below the map, the layers panel and the footer note, so the map fills the window below the title. Press **Show panels** to bring them back.
+- **Full screen** hides the browser's tabs and address bar. A web page cannot start full screen by itself: the button or the F key needs a click or key press first. Whether the Windows taskbar hides was not tested on Windows; it can be set to auto-hide in Windows settings.
+- **Hide bars** (3, 4 or 5 seconds, or never; default 4 seconds) fades the header controls, the KPI strip, the map's header row, the news tab, the map tools, the zoom control and the footer note after no mouse, touch, wheel or key use. The title stays. Moving the mouse brings everything back. The bars do not hide while a dialog is open or while you type in a field.
+- Keys: **M** for Full map, **F** for Full screen.
+- The Full map state and the hide delay are kept in this browser only. They hold no personal data and no keys.
+- Tests: a browser suite for the controls (`tests/dom_layout_test.js`) and a Python test that the shipped page is exactly what `build_frontend.py` builds (`tests/test_layout_controls.py`).
+
+## Upgrading from an earlier version
+
+- Your API keys are kept in the folder `~/..southeastasia_dashboard` in your user profile, so they carry over with no step.
+- Plotted custom markers are saved in `data/custom_markers.json` inside the dashboard folder. Copy that file from the old folder into the new one to keep them.
+- `data/cache.json` is rebuilt by the first poll after start, so nothing needs copying.
+
+## What changed in v1.6
+
+- India is shown as a normal country: there is no orange outline or highlight in this dashboard.
+- Military sites inside India's survey outline are not plotted. Civil points (pipelines, ports, airports, power plants) and news about India are shown.
+- Layers and the legend show only the categories that have data in this dashboard.
+
+## Permanent data updates
+- Update data (top bar) fetches the latest public data for this dashboard's layers now. The status line shows when data was last updated and when the next automatic update is due.
+- Automatic: every 7 days while the dashboard is running (the first run starts about 2 minutes after launch). Change update_every_days in data/dashboard.json; 0 switches automatic updates off.
+- Command line (for Windows Task Scheduler): python run.py --update-now runs one update and exits.
+- Sources, fixed in app/updates.py (no other address is ever fetched): OurAirports airports (public domain); WRI Global Power Plant Database, nuclear plants (CC BY 4.0); UCDP georeferenced conflict events from the last 30 days (CC BY 4.0); OpenStreetMap military sites, ports and pipelines as points (ODbL, © OpenStreetMap contributors).
+- Only layers this dashboard already shows are updated. Curated points are never overwritten; a new point within 2 km of a point in the same layer is skipped. Each point shows its source, licence, accuracy rating and fetch date.
+- OpenStreetMap points are crowd-sourced (accuracy Medium): check them before relying on them. Pipelines and cables are shown as points here; their route lines are not updated automatically.
+- If a source cannot be reached, its last good data stays and the error is shown in data/updates/status.json.
+- Military sites inside India's outline are never added to a dashboard that is not in focus mode.
+
+- Start (start.bat) creates a shortcut named "SouthEast Asia Dashboard" on the Desktop and in the Start menu each time it runs, then opens http://127.0.0.1:8815/ in the browser. To pin it to the taskbar, right-click the Desktop shortcut and choose Pin to taskbar (Windows does not let a script pin apps).
 
 Covers the eleven South-East Asian states (Myanmar, Thailand, Cambodia, Laos, Vietnam, Malaysia, Singapore, Indonesia, the
 Philippines, Brunei and Timor-Leste), the South China Sea and its reefs, Hainan, the Taiwan Strait, and the Malacca and
@@ -109,8 +143,8 @@ These are not plotted, or are plotted only where the verified notes say so:
   aggregators, so the underlying outlets are not named by the feed.
 - **GDELT:** 30 English-language queries on the South China Sea, each state, the navies, the nuclear and scam stories.
 - **USGS earthquakes:** events inside the frame.
-- **Ransomware.live:** claims filtered to the eleven states' country codes. Group claims are labelled unverified.
-- **X (Twitter):** official API v2 recent search with 10 queries. Set `X_BEARER_TOKEN`. Recent search needs a paid tier.
+- **Ransomware.live:** claims filtered to the eleven states' country codes. Shown as group claims, not confirmed victims.
+- **X (Twitter):** official API v2 recent search with 10 queries. Set `X_BEARER_TOKEN`.
 - **Facebook and Instagram:** official Graph and Business Discovery APIs. Set your tokens and list your own pages or accounts.
 - **Telegram:** `data/telegram_channels.json` carries the 16-channel public list from the earlier build. It has not been
   verified for South-East Asia, so add the channels you verify.
@@ -118,12 +152,12 @@ These are not plotted, or are plotted only where the verified notes say so:
 
 ## Tests
 
-36 Python tests (`python -m pytest tests/`) and three browser suites (`npm test`), which load the shipped page into a real
+39 Python tests (`python -m pytest tests/`) and four browser suites (`npm test`), which load the shipped page into a real
 DOM. The layer test fails the build if any toggle has no data behind it.
 
 ## Security
 
-- Keys and tokens are encrypted with AES-256-GCM and never appear in error messages.
+- Keys are encrypted with AES-256-GCM. The X and Facebook connectors remove their tokens from error messages.
 - The server listens on 127.0.0.1 only.
 - Strict Content-Security-Policy: no third-party scripts, fonts or trackers.
 - Headlines and labels are escaped before display; only http and https links become clickable.
